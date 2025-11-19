@@ -1,0 +1,853 @@
+/* ==================================== */
+/* 1. VARIÁVEIS E RESET GLOBAL          */
+/* ==================================== */
+:root {
+    /* Cores baseadas no design */
+    --primary-red: #db1a35;      /* Vermelho vibrante (morango, botões) */
+    --secondary-blue: #0097b2;   /* Azul turquesa/ciano (texto de destaque, sublinhados) */
+    --background-dark: #171717;  /* Preto principal do fundo */
+    --background-medium: #202020; /* Cinza escuro para alguns cards/elementos */
+    --text-light: #ffffff;       /* Texto branco geral */
+    --text-muted: #aaaaaa;       /* Texto cinza claro para detalhes */
+    --border-grey: #444444;      /* Borda para elementos */
+
+    /* ==================================== */
+    /* 2. FONTES GOOGLE FONTES              */
+    /* ==================================== */
+    --font-primary: 'Montserrat', sans-serif; /* Fonte padrão do projeto (Títulos e Corpo) */
+    --font-accent: 'Pinyon Script', cursive; /* Fonte cursiva para o nome "Marina Menezes" */
+    --font-code: 'Fira Code', monospace; /* Fonte para tags de código e habilidades */
+
+    /* Espaçamento */
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 1.5rem;
+    --spacing-lg: 3rem;
+    --section-padding: 80px 5%;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-primary);
+    line-height: 1.6;
+    color: var(--text-light);
+    background-color: var(--background-dark);
+    overflow-x: hidden; /* Prevenir rolagem horizontal em excesso */
+}
+
+a {
+    text-decoration: none;
+    color: var(--text-light);
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: var(--secondary-blue);
+}
+
+ul {
+    list-style: none;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    color: var(--text-light);
+}
+
+section {
+    padding: var(--section-padding);
+    position: relative; /* Para elementos posicionados absolutamente dentro */
+}
+
+/* Títulos gerais das seções */
+h2 {
+    font-size: 2.8rem;
+    margin-bottom: var(--spacing-lg);
+    text-align: center;
+    text-transform: uppercase;
+    color: var(--text-light);
+}
+
+/* Botões genéricos */
+.btn {
+    display: inline-block;
+    padding: 0.8rem 1.8rem;
+    background-color: var(--primary-red);
+    color: var(--text-light);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn:hover {
+    background-color: #e62c47; /* Tom mais escuro do vermelho */
+    transform: translateY(-2px);
+}
+
+/* Ícones sociais (se usados como texto 'in') */
+.social-icon-text {
+    font-family: var(--font-heading);
+    font-weight: bold;
+    color: var(--text-light);
+    border: 2px solid var(--text-light);
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: border-color 0.3s, color 0.3s;
+}
+
+.social-icon-text:hover {
+    border-color: var(--secondary-blue);
+    color: var(--secondary-blue);
+}
+
+
+/* ==================================== */
+/* 2. CABEÇALHO E NAVEGAÇÃO             */
+/* ==================================== */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-md) 5%;
+    background-color: var(--background-dark);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+.logo-icon img{
+    width: 70px;
+}
+
+
+nav ul {
+    display: flex;
+    gap: var(--spacing-lg); /* Espaçamento maior entre os itens de navegação */
+}
+
+nav ul li a {
+    color: var(--text-light);
+    font-weight: 500;
+    position: relative;
+    padding-bottom: 5px; /* Espaço para o underline */
+}
+
+nav ul li a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--secondary-blue);
+    transition: width 0.3s ease;
+}
+
+nav ul li a:hover::after {
+    width: 100%;
+}
+
+.social-medias{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.header-social {
+    display: flex;
+    gap: var(--spacing-md);
+}
+
+
+/* ==================================== */
+/* 3. SEÇÃO HERO (INTRODUÇÃO)           */
+/* ==================================== */
+#hero {
+    min-height: 110vh;
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    padding-top: 0;
+}
+
+/* Forma inclinada inferior */
+#hero::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 50px; /* Altura da forma */
+    background-color: var(--primary-red);
+    transform: skewY(-3deg); /* Inclinação */
+    transform-origin: bottom left;
+    z-index: 1;
+}
+
+#hero .content-wrapper {
+    position: relative;
+    z-index: 2; /* Para o conteúdo ficar acima das formas */
+}
+
+#hero .greeting {
+    display: flex;
+    justify-content: flex-start;
+    font-size: 40px;
+    margin-bottom: var(--spacing-xs);
+    color: var(--text-light);
+    font-family: var(--font-code);
+    width: 55%;
+}
+
+#hero .name {
+    font-family: var(--font-primary); /* Fonte cursiva para o nome */
+    font-size: 150px; /* Tamanho grande para o nome */
+    font-weight: normal;
+    line-height: 0.8; /* Ajustar a linha para o estilo cursivo */
+    color: var(--text-light);
+    margin-bottom: var(--spacing-sm);
+    position: relative;
+    display: flex; /* Para o span funcionar corretamente */
+    flex-direction: column;
+    width: 50vw;
+}
+
+#hero .first-name {
+    display: flex;
+    justify-content: center;
+    padding-right: 150px;
+}
+
+#hero .last-name {
+    color: var(--secondary-blue); /* "Menezes" em azul */
+    font-family: var(--font-accent) !important;
+    font-size: 200px;
+    display: flex;
+    right: 20%;
+    align-self: center;
+    padding-left: 50px;
+}
+
+#hero .role {
+    font-size: 1.8rem;
+    color: var(--text-light);
+    margin-top: var(--spacing-sm);
+    margin-bottom: var(--spacing-md);
+    letter-spacing: 2px;
+    font-family: var(--font-code);
+}
+
+#hero .social-medias {
+    display: flex;
+    gap: 15px;
+    z-index: 0;
+    position: absolute;
+    right: 50px;
+    bottom: 300px;
+}
+
+/* ==================================== */
+/* 4. SEÇÃO ABOUT (SOBRE)               */
+/* ==================================== */
+#about {
+    background-color: var(--background-dark);
+    padding-top: 150px; /* Para acomodar a forma inclinada da seção anterior */
+}
+
+#about h2 {
+    margin-bottom: var(--spacing-lg);
+    text-align: left; /* Título à esquerda como no design */
+    border-bottom: 2px solid var(--secondary-blue);
+    display: inline-block;
+    padding-bottom: 5px;
+    margin-left: 5%; /* Alinhar com o conteúdo */
+}
+
+.about-container {
+    display: flex;
+    flex-direction: column; /* Padrão mobile: imagem acima do texto */
+    align-items: center;
+    gap: var(--spacing-lg);
+}
+
+.about-image-wrapper {
+    position: relative;
+    width: 250px; /* Tamanho da imagem */
+    height: 250px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 5px solid var(--primary-red); /* Borda vermelha */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+}
+
+.about-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* Remover este fundo depois de ter uma imagem real */
+    background: linear-gradient(135deg, #a8dadc, #457b9d); /* Placeholder visual */
+}
+
+.about-image-wrapper::before,
+.about-image-wrapper::after {
+    content: '⭐'; /* Estrelas */
+    position: absolute;
+    font-size: 1.5rem;
+    color: gold; /* Cor das estrelas */
+    z-index: 10;
+}
+
+.about-image-wrapper::before {
+    top: 10%;
+    left: 10%;
+    transform: rotate(-20deg);
+}
+
+.about-image-wrapper::after {
+    bottom: 10%;
+    right: 10%;
+    transform: rotate(20deg);
+}
+
+
+.about-text {
+    max-width: 600px;
+    text-align: center;
+}
+
+.about-text p {
+    margin-bottom: var(--spacing-md);
+    font-size: 1.1rem;
+    color: var(--text-light);
+}
+
+.about-text strong {
+    color: var(--secondary-blue);
+}
+
+
+/* ==================================== */
+/* 5. SEÇÃO PROJECTS (PROJETOS)         */
+/* ==================================== */
+#projects {
+    background-color: var(--background-medium); /* Cor de fundo ligeiramente diferente */
+    overflow: hidden; /* Para o carrossel */
+}
+
+#projects h2 {
+    text-align: center;
+    border-bottom: 2px solid var(--primary-red);
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.projects-carousel-container {
+    position: relative;
+    padding: var(--spacing-lg) 0;
+    /* Ajuste para garantir que as setas estejam dentro ou fora conforme o design */
+}
+
+.projects-carousel {
+    display: flex;
+    overflow-x: scroll; /* Habilitar rolagem horizontal para o carrossel */
+    scroll-snap-type: x mandatory; /* Rolagem "encaixa" nos itens */
+    -webkit-overflow-scrolling: touch; /* Suavizar rolagem em iOS */
+    gap: var(--spacing-md);
+    padding-bottom: var(--spacing-md); /* Espaço para scrollbar se necessário */
+}
+
+/* Esconder a scrollbar padrão (opcional) */
+.projects-carousel::-webkit-scrollbar {
+    display: none;
+}
+.projects-carousel {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+
+.project-card {
+    flex: 0 0 300px; /* Tamanho fixo para cada card no carrossel */
+    scroll-snap-align: start; /* Alinhar ao início ao rolar */
+    background-color: var(--background-dark);
+    border: 1px solid var(--border-grey);
+    border-radius: 10px;
+    padding: var(--spacing-md);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Empurrar links para baixo */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+
+.project-card .project-image-placeholder {
+    width: 100%;
+    height: 150px;
+    background-color: var(--border-grey); /* Placeholder para imagem */
+    border-radius: 5px;
+    margin-bottom: var(--spacing-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-muted);
+    font-style: italic;
+    overflow: hidden;
+}
+
+.project-card h3 {
+    color: var(--secondary-blue);
+    margin-bottom: var(--spacing-sm);
+    font-size: 1.4rem;
+}
+
+.project-card p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    margin-bottom: var(--spacing-md);
+}
+
+.tech-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-xs);
+    margin-bottom: var(--spacing-md);
+}
+
+.tech-tag {
+    background-color: var(--background-medium);
+    color: var(--text-light);
+    padding: 0.3rem 0.7rem;
+    border-radius: 5px;
+    font-size: 0.8rem;
+    border: 1px solid var(--border-grey);
+}
+
+.project-links {
+    display: flex;
+    gap: var(--spacing-md);
+    margin-top: auto; /* Empurra os links para o final do card */
+}
+
+.project-links a {
+    color: var(--primary-red);
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    border-bottom: 2px solid transparent;
+    transition: border-color 0.3s ease;
+}
+
+.project-links a:hover {
+    border-color: var(--secondary-blue);
+    color: var(--secondary-blue);
+}
+
+.carousel-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.6);
+    color: var(--text-light);
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 2rem;
+    z-index: 10;
+    border-radius: 50%; /* Faz a seta parecer um botão redondo */
+    opacity: 0.8;
+    transition: opacity 0.3s ease, background-color 0.3s ease;
+}
+
+.carousel-arrow:hover {
+    opacity: 1;
+    background-color: var(--primary-red);
+}
+
+.carousel-arrow.left {
+    left: 10px;
+}
+
+.carousel-arrow.right {
+    right: 10px;
+}
+
+
+/* ==================================== */
+/* 6. SEÇÃO KNOWLEDGE (HABILIDADES)     */
+/* ==================================== */
+#knowledge {
+    background-color: var(--background-dark);
+}
+
+#knowledge h2 {
+    text-align: center;
+    border-bottom: 2px solid var(--secondary-blue);
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.knowledge-layout {
+    display: flex;
+    flex-direction: column; /* Mobile: sidebar acima ou abaixo do conteúdo principal */
+    gap: var(--spacing-lg);
+}
+
+.knowledge-sidebar {
+    background-color: var(--background-medium);
+    padding: var(--spacing-md);
+    border-radius: 10px;
+    width: 100%; /* Largura total em mobile */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* Centralizar ícones */
+    gap: var(--spacing-sm);
+    border: 1px solid var(--border-grey);
+}
+
+.sidebar-icon {
+    width: 40px;
+    height: 40px;
+    background-color: var(--background-dark); /* Fundo para cada ícone */
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem; /* Tamanho do ícone, se for texto/emoji */
+    color: var(--primary-red); /* Cor dos ícones */
+    border: 1px solid var(--border-grey);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.sidebar-icon:hover {
+    background-color: var(--primary-red);
+    color: var(--text-light);
+    cursor: pointer;
+}
+
+.knowledge-main-content {
+    flex-grow: 1;
+}
+
+.knowledge-controls {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-md);
+    flex-wrap: wrap; /* Quebra de linha em telas pequenas */
+}
+
+.search-box {
+    display: flex;
+    align-items: center;
+    background-color: var(--background-medium);
+    border-radius: 5px;
+    padding: 0 10px;
+    flex-grow: 1; /* Ocupa espaço disponível */
+    border: 1px solid var(--border-grey);
+}
+
+.search-box .icon {
+    color: var(--text-muted);
+    margin-right: var(--spacing-xs);
+    font-size: 1.1rem;
+}
+
+.search-box input {
+    border: none;
+    background-color: transparent;
+    padding: 10px 5px;
+    outline: none;
+    color: var(--text-light);
+    flex-grow: 1;
+}
+
+.search-box input::placeholder {
+    color: var(--text-muted);
+}
+
+.filter-dropdown {
+    position: relative;
+    padding: 10px 15px;
+    background-color: var(--primary-red);
+    color: var(--text-light);
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    white-space: nowrap;
+    transition: background-color 0.3s ease;
+}
+
+.filter-dropdown:hover {
+    background-color: #e62c47;
+}
+
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); /* 100px para mobile, ajusta em desktop */
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-md);
+}
+
+.skill-item {
+    background-color: var(--background-medium);
+    border: 1px solid var(--border-grey);
+    padding: 15px 10px;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: 500;
+    font-size: 0.9rem;
+    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+
+.skill-item:hover {
+    background-color: var(--secondary-blue);
+    border-color: var(--secondary-blue);
+    color: var(--text-light);
+}
+
+/* ==================================== */
+/* 7. RODAPÉ E CONTATO                  */
+/* ==================================== */
+#contact {
+    background-color: var(--background-dark);
+    padding-top: var(--spacing-lg);
+    padding-bottom: var(--spacing-lg);
+    text-align: center;
+}
+
+.contact-header {
+    margin-bottom: var(--spacing-lg);
+}
+
+.contact-header .icon {
+    /* Ícone do morango com tag de código */
+    font-size: 3rem;
+    color: var(--primary-red);
+    position: relative;
+    display: inline-block;
+    margin-bottom: var(--spacing-sm);
+}
+
+.contact-header .icon::before {
+    content: '</>'; /* Tag de código */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.2rem;
+    font-family: monospace;
+    color: var(--text-light);
+}
+
+.contact-header p {
+    font-size: 1.8rem;
+    font-weight: 300;
+    color: var(--text-light);
+    margin-bottom: var(--spacing-md);
+}
+
+.contact-header p strong {
+    color: var(--secondary-blue);
+    font-weight: normal; /* Para não ficar negrito demais */
+}
+
+.contact-header .btn {
+    margin-top: var(--spacing-md);
+}
+
+.footer-main {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+    margin-top: var(--spacing-lg);
+    padding-top: var(--spacing-lg);
+    border-top: 1px solid var(--border-grey);
+}
+
+.footer-left {
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+    align-items: flex-start; /* Alinhar itens à esquerda */
+}
+
+.footer-social-icons {
+    display: flex;
+    gap: var(--spacing-md);
+}
+
+.footer-social-icons .social-icon {
+    width: 30px;
+    height: 30px;
+    background-color: var(--background-medium);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-light);
+    font-size: 1.2rem;
+    border: 1px solid var(--border-grey);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.footer-social-icons .social-icon:hover {
+    background-color: var(--secondary-blue);
+    color: var(--text-light);
+}
+
+.footer-left p {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+.footer-right {
+    text-align: right;
+}
+
+.footer-links h4 {
+    margin-bottom: var(--spacing-sm);
+    color: var(--primary-red);
+    text-transform: uppercase;
+    font-size: 1rem;
+}
+
+.footer-links ul li a {
+    color: var(--text-muted);
+    display: block;
+    padding: 3px 0;
+    font-size: 0.9rem;
+}
+
+.footer-links ul li a:hover {
+    color: var(--secondary-blue);
+}
+
+.copyright {
+    margin-top: var(--spacing-lg);
+    color: var(--text-muted);
+    font-size: 0.8rem;
+    text-align: center;
+}
+
+
+/* ==================================== */
+/* 8. RESPONSIVIDADE                    */
+/* ==================================== */
+@media (min-width: 768px) {
+    /* Desktop / Tablet */
+
+    #hero .role {
+        font-size: 2.5rem;
+    }
+
+    /* About Section */
+    #about h2 {
+        margin-left: 0; /* Centralizar novamente se preferir, ou manter à esquerda */
+        text-align: center;
+        width: fit-content;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .about-container {
+        flex-direction: row; /* Imagem à esquerda, texto à direita */
+        justify-content: center;
+        align-items: flex-start; /* Alinhar o topo do texto com a imagem */
+        text-align: left;
+    }
+
+    .about-text {
+        text-align: left;
+        max-width: 50%; /* Ocupar metade do espaço */
+    }
+
+    /* Projects Section */
+    .projects-carousel-container {
+        width: 80%; /* Ajuste a largura do carrossel */
+        margin: 0 auto;
+    }
+
+    .carousel-arrow.left {
+        left: -50px; /* Setas fora do contêiner do carrossel */
+    }
+
+    .carousel-arrow.right {
+        right: -50px;
+    }
+
+    /* Knowledge Section */
+    .knowledge-layout {
+        flex-direction: row; /* Sidebar à esquerda, conteúdo principal à direita */
+        align-items: flex-start;
+    }
+
+    .knowledge-sidebar {
+        width: 150px; /* Largura fixa para a sidebar */
+        flex-direction: column;
+        justify-content: flex-start;
+        flex-shrink: 0; /* Não encolher */
+        gap: var(--spacing-md);
+    }
+
+    .knowledge-controls {
+        flex-wrap: nowrap; /* Não quebrar a linha */
+    }
+
+    /* Footer */
+    .footer-main {
+        flex-direction: row; /* Links e redes sociais lado a lado */
+        justify-content: space-between;
+        align-items: flex-start;
+        text-align: left;
+    }
+
+    .footer-left, .footer-right {
+        text-align: left; /* Alinhar texto à esquerda */
+    }
+
+    .footer-links {
+        display: flex;
+        gap: var(--spacing-lg); /* Mais espaço entre as colunas de links */
+    }
+    
+    .copyright {
+        text-align: left; /* Direitos autorais à esquerda */
+    }
+}
+
+.circulo-vermelho {
+    width: 30vw;        /* Define o diâmetro do círculo */
+    height: 63vh;       /* Garante que seja um círculo (largura = altura) */
+    background-color: #db1a35; /* A cor vermelha solicitada */
+    border-radius: 50%;  /* Transforma o quadrado em círculo */
+    z-index: -1;
+    position: absolute;
+}
