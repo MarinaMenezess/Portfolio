@@ -73,7 +73,6 @@ h2 {
     font-size: 2.8rem;
     margin-bottom: var(--spacing-lg);
     text-align: center;
-    text-transform: uppercase;
     color: var(--text-light);
 }
 
@@ -273,6 +272,20 @@ nav ul li a:hover::after {
 #about {
     background-color: var(--background-dark);
     padding-top: 150px; /* Para acomodar a forma inclinada da seção anterior */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 70px;
+}
+
+#about img{
+    width: 550px;
+    border-radius: 50%;
+}
+
+#about div{
+    text-align: end;
+    max-width: 600px;
 }
 
 #about h2 {
@@ -353,13 +366,14 @@ nav ul li a:hover::after {
 #projects {
     background-color: var(--background-medium); /* Cor de fundo ligeiramente diferente */
     overflow: hidden; /* Para o carrossel */
+    display: flex;
+    flex-direction: column;
 }
 
 #projects h2 {
-    text-align: center;
+    color: var(--primary-red);
     border-bottom: 2px solid var(--primary-red);
-    margin-left: auto;
-    margin-right: auto;
+    align-self: flex-start;
 }
 
 .projects-carousel-container {
