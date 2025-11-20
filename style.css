@@ -378,7 +378,6 @@ nav ul li a:hover::after {
 
 .projects-carousel-container {
     position: relative;
-    padding: var(--spacing-lg) 0;
     /* Ajuste para garantir que as setas estejam dentro ou fora conforme o design */
 }
 

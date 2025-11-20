@@ -75,6 +75,34 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // ====================================
+    // 3. FUNCIONALIDADE DO CARROSSEL (PROJECTS)
+    // Permite navegar pelos projetos usando as setas.
+    // ====================================
+    const carousel = document.querySelector('.projects-carousel');
+    const leftArrow = document.querySelector('.carousel-arrow.left');
+    const rightArrow = document.querySelector('.carousel-arrow.right');
+    // Largura aproximada de um cartão + gap (300px + espaçamento)
+    const scrollStep = 320; 
+
+    if (carousel && leftArrow && rightArrow) {
+        leftArrow.addEventListener('click', () => {
+            // Rola para a esquerda
+            carousel.scrollBy({
+                left: -scrollStep,
+                behavior: 'smooth'
+            });
+        });
+
+        rightArrow.addEventListener('click', () => {
+            // Rola para a direita
+            carousel.scrollBy({
+                left: scrollStep,
+                behavior: 'smooth'
+            });
+        });
+    }
+
     // Opcional: Efeito simples ao carregar a página
     console.log("Portfólio de Marina Menezes carregado com sucesso!");
 
