@@ -190,6 +190,15 @@ nav ul li a:hover::after {
     padding-top: 0;
 }
 
+.circulo-vermelho {
+    width: 30vw;        /* Define o diâmetro do círculo */
+    height: 63vh;       /* Garante que seja um círculo (largura = altura) */
+    background-color: #db1a35; /* A cor vermelha solicitada */
+    border-radius: 50%;  /* Transforma o quadrado em círculo */
+    z-index: -1;
+    position: absolute;
+}
+
 /* Forma inclinada inferior */
 #hero::after {
     content: '';
@@ -270,7 +279,7 @@ nav ul li a:hover::after {
 /* 4. SEÇÃO ABOUT (SOBRE)               */
 /* ==================================== */
 #about {
-    background-color: var(--background-dark);
+    background-color: var(--background-medium);
     padding-top: 150px; /* Para acomodar a forma inclinada da seção anterior */
     display: flex;
     align-items: center;
@@ -364,7 +373,7 @@ nav ul li a:hover::after {
 /* 5. SEÇÃO PROJECTS (PROJETOS)         */
 /* ==================================== */
 #projects {
-    background-color: var(--background-medium); /* Cor de fundo ligeiramente diferente */
+    background-color: var(--background-dark); /* Cor de fundo ligeiramente diferente */
     overflow: hidden; /* Para o carrossel */
     display: flex;
     flex-direction: column;
@@ -570,134 +579,183 @@ nav ul li a:hover::after {
 /* 6. SEÇÃO KNOWLEDGE (HABILIDADES)     */
 /* ==================================== */
 #knowledge {
-    background-color: var(--background-dark);
+    background-color: var(--background-medium);
+    display: flex;
+    justify-content: space-between;
+    padding: 0 5%;
 }
 
 #knowledge h2 {
-    text-align: center;
-    border-bottom: 2px solid var(--secondary-blue);
+    /* Cor do título Knowledge em vermelho e alinhamento central */
+    color: var(--primary-red);
+    border-bottom: 2px solid var(--primary-red);
     margin-left: auto;
     margin-right: auto;
+    width: fit-content;
 }
 
 .knowledge-layout {
     display: flex;
-    flex-direction: column; /* Mobile: sidebar acima ou abaixo do conteúdo principal */
-    gap: var(--spacing-lg);
+    flex-direction: column;
+    width: 65vw;
+    padding: 80px 0;
 }
 
+/* --- Sidebar de Filtros (Ícones na Esquerda) --- */
 .knowledge-sidebar {
-    background-color: var(--background-medium);
-    padding: var(--spacing-md);
-    border-radius: 10px;
-    width: 100%; /* Largura total em mobile */
+    /* Estilo de Sidebar da imagem: Ícones verticais */
+    background-color: transparent; 
+    border-radius: 0;
+    width: 50px; 
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center; /* Centralizar ícones */
-    gap: var(--spacing-sm);
-    border: 1px solid var(--border-grey);
+    justify-content: flex-start; 
+    gap: 30px;
+    border: none;
+    /* Ajuste para mobile (visível apenas em desktop na imagem, mas mantido aqui) */
+}
+
+.column{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
 .sidebar-icon {
     width: 40px;
     height: 40px;
-    background-color: var(--background-dark); /* Fundo para cada ícone */
-    border-radius: 5px;
+    background-color: var(--background-medium);
+    border-radius: 50%; /* Redondo */
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.5rem; /* Tamanho do ícone, se for texto/emoji */
-    color: var(--primary-red); /* Cor dos ícones */
-    border: 1px solid var(--border-grey);
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-.sidebar-icon:hover {
-    background-color: var(--primary-red);
-    color: var(--text-light);
+    font-size: 1rem;
+    color: var(--text-muted); 
+    border: 2px solid var(--border-grey);
+    transition: all 0.3s ease;
     cursor: pointer;
 }
 
+.sidebar-icon:hover, .sidebar-icon.active {
+    background-color: var(--primary-red);
+    border-color: var(--primary-red);
+    color: var(--text-light);
+    transform: scale(1.1);
+}
+
 .knowledge-main-content {
-    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    max-width: 65vw;
+    align-items: flex-end;
+    gap: 20px;
 }
 
 .knowledge-controls {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    justify-content: flex-end; /* Alinha à direita */
     gap: var(--spacing-md);
-    margin-bottom: var(--spacing-md);
-    flex-wrap: wrap; /* Quebra de linha em telas pequenas */
+    flex-wrap: wrap;
+    max-width: 600px; /* Largura para os controles */
+
 }
 
 .search-box {
-    display: flex;
-    align-items: center;
-    background-color: var(--background-medium);
+    /* Fundo branco e borda preta como na imagem */
+    background-color: transparent;
+    border: 1px solid var(--text-light);
     border-radius: 5px;
-    padding: 0 10px;
-    flex-grow: 1; /* Ocupa espaço disponível */
-    border: 1px solid var(--border-grey);
+    padding: 0 10px; 
+    flex-grow: 1; 
+    max-width: 300px;
+    /* Correção de estilo da caixa de busca */
+    border-color: #aaaaaa; 
 }
 
 .search-box .icon {
+    content: '🔎'; /* Ícone de lupa */
     color: var(--text-muted);
     margin-right: var(--spacing-xs);
     font-size: 1.1rem;
 }
 
 .search-box input {
-    border: none;
-    background-color: transparent;
-    padding: 10px 5px;
-    outline: none;
-    color: var(--text-light);
-    flex-grow: 1;
-}
-
-.search-box input::placeholder {
-    color: var(--text-muted);
+    padding: 10px 5px; 
 }
 
 .filter-dropdown {
-    position: relative;
-    padding: 10px 15px;
-    background-color: var(--primary-red);
+    /* Estilo do dropdown "All v" */
+    background-color: var(--background-medium);
+    border: 1px solid var(--text-light);
     color: var(--text-light);
+    transition: none; 
+    padding-right: 15px;
     border-radius: 5px;
-    cursor: pointer;
-    font-weight: bold;
-    white-space: nowrap;
-    transition: background-color 0.3s ease;
 }
 
 .filter-dropdown:hover {
-    background-color: #e62c47;
+    background-color: var(--background-medium); 
 }
 
 .skills-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); /* 100px para mobile, ajusta em desktop */
-    gap: var(--spacing-md);
-    margin-top: var(--spacing-md);
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    width: 100%;
 }
 
+/* --- Estilo dos Itens de Habilidade (Skills) com Ícones --- */
 .skill-item {
-    background-color: var(--background-medium);
+    background-color: var(--background-medium); 
     border: 1px solid var(--border-grey);
     padding: 15px 10px;
-    border-radius: 5px;
-    text-align: center;
+    border-radius: 30px; /* Borda arredondada */
+    text-align: left;
     font-weight: 500;
-    font-size: 0.9rem;
-    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+    font-size: 1rem;
+    width: 260px;
+    color: var(--text-light);
+    display: flex; /* Para alinhar o ícone e o texto */
+    align-items: center;
+    gap: 20px;
+    cursor: default;
+    /* Garante que o item de habilidade não quebre */
+    white-space: nowrap; 
 }
 
 .skill-item:hover {
-    background-color: var(--secondary-blue);
-    border-color: var(--secondary-blue);
+    background-color: var(--background-medium); 
+    border-color: var(--primary-red); 
     color: var(--text-light);
+    /* Remove a transição de cor do item de habilidade */
 }
+
+.skill-item svg, .skill-item img{
+    width: 20px;
+    height: 20px;
+}
+
+/* Adicionando ícones (simulados com emojis ou caracteres) */
+/* Para um visual exato da imagem, você precisará usar SVGs. Abaixo estão placeholders textuais: */
+
+.skill-item::before {
+    content: ''; /* Padrão vazio */
+    font-size: 1.2rem;
+    line-height: 1;
+}
+
+/* Mapeamento de skills para simular ícones */
+.skill-item[data-category="general"][data-skill="Git"]::before { content: 'G'; color: #F05032; } 
+.skill-item[data-category="frontend"][data-skill="CSS"]::before { content: 'S'; color: #1572B6; }
+.skill-item[data-category="tool"][data-skill="VS Code"]::before { content: 'V'; color: #007ACC; }
+.skill-item[data-category="frontend"][data-skill="HTML"]::before { content: 'H'; color: #E44F26; }
+.skill-item[data-category="frontend"][data-skill="JavaScript"]::before { content: 'J'; color: #F7DF1E; }
+.skill-item[data-category="backend"][data-skill="MySQL"]::before { content: 'M'; color: #4479A1; }
+.skill-item[data-category="backend"][data-skill="Node.js"]::before { content: 'N'; color: #339933; }
+.skill-item[data-category="general"][data-skill="GitHub"]::before { content: 'H'; color: #ffffff; }
+.skill-item[data-category="devops"][data-skill="Vercel"]::before { content: 'V'; color: #000000; } /* Vercel é preto */
+.skill-item[data-category="backend"][data-skill="Python"]::before { content: 'P'; color: #3776AB; }
+
 
 /* ==================================== */
 /* 7. RODAPÉ E CONTATO                  */
@@ -826,96 +884,3 @@ nav ul li a:hover::after {
 }
 
 
-/* ==================================== */
-/* 8. RESPONSIVIDADE                    */
-/* ==================================== */
-@media (min-width: 768px) {
-    /* Desktop / Tablet */
-
-    #hero .role {
-        font-size: 2.5rem;
-    }
-
-    /* About Section */
-    #about h2 {
-        margin-left: 0; /* Centralizar novamente se preferir, ou manter à esquerda */
-        text-align: center;
-        width: fit-content;
-        margin-left: auto;
-        margin-right: auto;
-    }
-
-    .about-container {
-        flex-direction: row; /* Imagem à esquerda, texto à direita */
-        justify-content: center;
-        align-items: flex-start; /* Alinhar o topo do texto com a imagem */
-        text-align: left;
-    }
-
-    .about-text {
-        text-align: left;
-        max-width: 50%; /* Ocupar metade do espaço */
-    }
-
-    /* Projects Section */
-    .projects-carousel-container {
-        width: 80%; /* Ajuste a largura do carrossel */
-        margin: 0 auto;
-    }
-
-    .carousel-arrow.left {
-        left: -50px; /* Setas fora do contêiner do carrossel */
-    }
-
-    .carousel-arrow.right {
-        right: -50px;
-    }
-
-    /* Knowledge Section */
-    .knowledge-layout {
-        flex-direction: row; /* Sidebar à esquerda, conteúdo principal à direita */
-        align-items: flex-start;
-    }
-
-    .knowledge-sidebar {
-        width: 150px; /* Largura fixa para a sidebar */
-        flex-direction: column;
-        justify-content: flex-start;
-        flex-shrink: 0; /* Não encolher */
-        gap: var(--spacing-md);
-    }
-
-    .knowledge-controls {
-        flex-wrap: nowrap; /* Não quebrar a linha */
-    }
-
-    /* Footer */
-    .footer-main {
-        flex-direction: row; /* Links e redes sociais lado a lado */
-        justify-content: space-between;
-        align-items: flex-start;
-        text-align: left;
-    }
-
-    .footer-left, .footer-right {
-        text-align: left; /* Alinhar texto à esquerda */
-    }
-
-    .footer-links {
-        display: flex;
-        gap: var(--spacing-lg); /* Mais espaço entre as colunas de links */
-    }
-    
-    .copyright {
-        text-align: left; /* Direitos autorais à esquerda */
-    }
-}
-
-.circulo-vermelho {
-    width: 30vw;        /* Define o diâmetro do círculo */
-    height: 63vh;       /* Garante que seja um círculo (largura = altura) */
-    background-color: #db1a35; /* A cor vermelha solicitada */
-    border-radius: 50%;  /* Transforma o quadrado em círculo */
-    z-index: -1;
-    position: absolute;
-}
