@@ -66,6 +66,7 @@ h1, h2, h3, h4, h5, h6 {
 section {
     padding: var(--section-padding);
     position: relative; /* Para elementos posicionados absolutamente dentro */
+    height: 100vh;
 }
 
 /* Títulos gerais das seções */
@@ -377,6 +378,7 @@ nav ul li a:hover::after {
     overflow: hidden; /* Para o carrossel */
     display: flex;
     flex-direction: column;
+    margin-bottom: 5%;
 }
 
 #projects h2 {
@@ -421,6 +423,7 @@ nav ul li a:hover::after {
     flex-direction: column;
     justify-content: space-between; /* Empurrar links para baixo */
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    min-width: 400px;
 }
 
 .project-card:hover {

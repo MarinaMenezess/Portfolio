@@ -90,6 +90,15 @@ document.addEventListener('DOMContentLoaded', () => {
     // ====================================
     // 4. CARREGAMENTO DE PROJETOS DO GITHUB
     // ====================================
+    
+    // AVISO DE SEGURANÇA: NUNCA USE UM TOKEN REAL NESTE ARQUIVO EM PROJETOS PÚBLICOS.
+    // ISTO EXPÕE SUA CREDENCIAL. USE UM PROXY SERVER-SIDE (FUNÇÃO SERVERLESS) PARA SEGURANÇA.
+    // Substitua 'SEU_TOKEN_DE_TESTE_AQUI' pelo seu Personal Access Token para testes.
+    const GITHUB_TOKEN = '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'; 
+    const authHeaders = GITHUB_TOKEN && GITHUB_TOKEN !== 'SEU_TOKEN_DE_TESTE_AQUI' ? 
+                        { 'Authorization': `token ${GITHUB_TOKEN}` } : 
+                        {};
+
 
     // Seu nome de usuário:
     const githubUsername = 'MarinaMenezess'; 
@@ -136,7 +145,7 @@ document.addEventListener('DOMContentLoaded', () => {
             carousel.innerHTML = '<p style="text-align: center; width: 100%; color: var(--text-muted);">Carregando projetos...</p>';
             
             // 1. Busca inicial dos repositórios
-            const initialResponse = await fetch(initialApiUrl);
+            const initialResponse = await fetch(initialApiUrl, { headers: authHeaders });
             
             if (!initialResponse.ok) {
                 throw new Error(`Erro ao buscar repositórios: ${initialResponse.status} ${initialResponse.statusText}`);
@@ -147,7 +156,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // 2. Cria promises para buscar as linguagens de CADA repositório
             const languagePromises = repos.map(async (repo) => {
                 const languagesUrl = repo.languages_url; 
-                const langResponse = await fetch(languagesUrl);
+                const langResponse = await fetch(languagesUrl, { headers: authHeaders });
                 
                 if (!langResponse.ok) {
                     console.warn(`Aviso: Falha ao buscar linguagens para ${repo.name}. Usando a linguagem principal.`);
