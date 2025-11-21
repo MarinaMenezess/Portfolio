@@ -401,11 +401,11 @@ nav ul li a:hover::after {
 
 
 .project-card {
-    flex: 0 0 300px; /* Tamanho fixo para cada card no carrossel */
+    flex: 0 0 350px; /* Tamanho fixo para cada card no carrossel */
     scroll-snap-align: start; /* Alinhar ao início ao rolar */
     background-color: var(--background-dark);
     border: 1px solid var(--border-grey);
-    border-radius: 10px;
+    border-radius: 25px;
     padding: var(--spacing-md);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
     display: flex;
@@ -456,10 +456,65 @@ nav ul li a:hover::after {
     background-color: var(--background-medium);
     color: var(--text-light);
     padding: 0.3rem 0.7rem;
-    border-radius: 5px;
+    border-radius: 15px;
     font-size: 0.8rem;
     border: 1px solid var(--border-grey);
 }
+/* ==================================== */
+/* 9. ESTILOS DE COR POR LINGUAGEM      */
+/* ==================================== */
+
+/* Cores Base */
+.tech-tag {
+    /* Mantém a cor de texto padrão, mas remove o fundo anterior */
+    background-color: var(--background-medium); /* Volta ao cinza para tags genéricas */
+    color: var(--text-light); 
+    border: none !important; /* Remove a borda para destacar a cor de fundo */
+    font-weight: bold;
+}
+
+/* HTML (Laranja) */
+.tech-tag[data-tech-language="HTML"] {
+    background-color: #E44F26; /* Laranja da logo HTML5 */
+    color: var(--text-light);
+}
+
+/* CSS (Azul) */
+.tech-tag[data-tech-language="CSS"] {
+    background-color: #1572B6; /* Azul da logo CSS3 */
+    color: var(--text-light);
+}
+
+/* JavaScript (Amarelo) */
+.tech-tag[data-tech-language="JavaScript"] {
+    background-color: #F7DF1E; /* Amarelo da logo JS */
+    color: #323330; /* Texto escuro para contraste */
+}
+
+/* Python (Verde/Azul Escuro) */
+.tech-tag[data-tech-language="Python"] {
+    background-color: #3776AB;
+    color: var(--text-light);
+}
+
+/* React (Ciano/Azul Claro) */
+.tech-tag[data-tech-language="React"] {
+    background-color: #61DAFB;
+    color: #20232A;
+}
+
+/* Node.js (Verde) */
+.tech-tag[data-tech-language="Node.js"] {
+    background-color: #339933;
+    color: var(--text-light);
+}
+
+/* MySQL (Azul Ciano) */
+.tech-tag[data-tech-language="MySQL"] {
+    background-color: #4479A1;
+    color: var(--text-light);
+}
+/* Adicione mais cores aqui conforme necessário (ex: PHP, Java, Ruby, TypeScript, etc.) */
 
 .project-links {
     display: flex;
