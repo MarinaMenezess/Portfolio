@@ -586,6 +586,8 @@ nav ul li a:hover::after {
     display: flex;
     justify-content: space-between;
     padding: 0 5%;
+    /* Garante que os filhos (sidebar e layout) comecem no topo */
+    align-items: flex-start;
 }
 
 #knowledge h2 {
@@ -601,7 +603,8 @@ nav ul li a:hover::after {
     display: flex;
     flex-direction: column;
     width: 65vw;
-    padding: 80px 0;
+    /* Aplica o padding vertical aqui para alinhar com o sidebar */
+    padding: var(--spacing-lg) 0;
 }
 
 /* --- Sidebar de Filtros (Ícones na Esquerda) --- */
@@ -609,10 +612,19 @@ nav ul li a:hover::after {
     /* Estilo de Sidebar da imagem: Ícones verticais */
     background-color: transparent; 
     border-radius: 0;
-    width: 50px; 
-    display: flex;
-    justify-content: flex-start; 
-    gap: 30px;
+    
+    /* PROPRIEDADES DE LAYOUT/VIEWPORT PARA ANIMAÇÃO */
+    display: flex; /* Mantenha como flex para as colunas lado a lado */
+    justify-content: center; /* Centraliza as duas colunas */
+    gap: 30px; /* Mantém o espaçamento entre as colunas */
+    width: 150px; /* Define a largura para as duas colunas + gap */
+    
+    height: 100%; /* Usa 100% da altura do pai (#knowledge) */
+    overflow: hidden; /* Oculta o conteúdo animado que sai da janela */
+    position: relative;
+    /* Alinha o conteúdo interno (as colunas) ao topo do sidebar */
+    align-items: flex-start; 
+
     border: none;
     /* Ajuste para mobile (visível apenas em desktop na imagem, mas mantido aqui) */
 }
@@ -621,6 +633,12 @@ nav ul li a:hover::after {
     display: flex;
     flex-direction: column;
     gap: 20px;
+
+    /* PROPRIEDADES DE ANIMAÇÃO */
+    height: 200%; /* Permite o loop (o conteúdo duplicado no HTML ocupa 200%) */
+    animation-duration: 40s; /* Duração da animação (mais lento) */
+    animation-timing-function: linear; /* Sem aceleração para movimento constante */
+    animation-iteration-count: infinite; /* Repetição infinita */
 }
 
 .sidebar-icon {
@@ -733,7 +751,7 @@ nav ul li a:hover::after {
     /* Remove a transição de cor do item de habilidade */
 }
 
-.skill-item svg, .skill-item img{
+.skill-item svg, .skill-item img, .sidebar-icon svg, .sidebar-icon img{
     width: 20px;
     height: 20px;
 }
@@ -768,6 +786,18 @@ nav ul li a:hover::after {
     padding-top: var(--spacing-lg);
     padding-bottom: var(--spacing-lg);
     text-align: center;
+}
+
+#contact img{
+    width: 300px;
+}
+
+#contact p{
+    font-size: 90px;
+}
+
+#contact b{
+    color: var(--secondary-blue);
 }
 
 .contact-header {
@@ -810,26 +840,51 @@ nav ul li a:hover::after {
     margin-top: var(--spacing-md);
 }
 
-.footer-main {
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-lg);
-    margin-top: var(--spacing-lg);
-    padding-top: var(--spacing-lg);
-    border-top: 1px solid var(--border-grey);
+#contact-btn{
+    background-color: var(--primary-red);
+    color: #ffffff;
+    border: none;
+    border-radius: 40px;
+    padding: 15px 35px;
+    font-size: 40px;
+    margin-top: 20px;
 }
 
-.footer-left {
-    text-align: left;
+footer{
+    background: #DB1A35;
+    background: linear-gradient(0deg, rgba(219, 26, 53, 1) 20%, rgba(23, 23, 23, 1) 94%);
     display: flex;
     flex-direction: column;
-    gap: var(--spacing-sm);
-    align-items: flex-start; /* Alinhar itens à esquerda */
+    justify-content: flex-end;
+    padding: 40px;
+    height: 90vh;
+}
+
+footer img{
+    width: 65px;
+}
+
+.footer-main {
+    display: flex;
+    gap: var(--spacing-lg);
+    justify-content: flex-start;
+    gap: 500px;
+    margin-top: 15%;
+    margin: 5%;
+}
+
+.footer-abt {
+    text-align: left;
+    flex-direction: column;
+    width: 300px;
+    display: flex;
+    gap: 15px;
 }
 
 .footer-social-icons {
     display: flex;
-    gap: var(--spacing-md);
+    gap: 15px;
+    align-items: end;
 }
 
 .footer-social-icons .social-icon {
@@ -863,13 +918,13 @@ nav ul li a:hover::after {
 
 .footer-links h4 {
     margin-bottom: var(--spacing-sm);
-    color: var(--primary-red);
+    color: #ffff;
     text-transform: uppercase;
     font-size: 1rem;
 }
 
 .footer-links ul li a {
-    color: var(--text-muted);
+    color: #ffff;
     display: block;
     padding: 3px 0;
     font-size: 0.9rem;
@@ -880,10 +935,40 @@ nav ul li a:hover::after {
 }
 
 .copyright {
-    margin-top: var(--spacing-lg);
-    color: var(--text-muted);
-    font-size: 0.8rem;
+    border-top: 1px solid #ffff;
+    padding: 20px;
+    color: #ffff;
+    font-size: 0.9rem;
     text-align: center;
 }
 
 
+/* ==================================== */
+/* 8. ANIMAÇÕES (SIDEBAR KNOWLEDGE)     */
+/* ==================================== */
+
+/* Keyframes para movimento vertical infinito */
+@keyframes scrollUp {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        /* Move o conteúdo para cima pela metade (50%) do seu tamanho total */
+        transform: translateY(-50%); 
+    }
+}
+
+/* Coluna 1: Move para cima */
+#knowledge .knowledge-sidebar .column:first-child {
+    animation-name: scrollUp;
+    /* NOVO: Reinicia o atraso para 0s para que a Coluna 2 comece na metade do ciclo */
+    animation-delay: 0s; 
+}
+
+/* Coluna 2: Move para baixo (reverte a direção da animação) */
+#knowledge .knowledge-sidebar .column:last-child {
+    animation-name: scrollUp;
+    animation-direction: reverse; /* Inverte a direção do keyframe */
+    /* NOVO: Inicia a 20s (metade de 40s) para manter a Coluna 1 e 2 sempre visíveis, dessincronizando o movimento */
+    animation-delay: -20s; 
+}
