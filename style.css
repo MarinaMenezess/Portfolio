@@ -867,8 +867,7 @@ footer img{
 .footer-main {
     display: flex;
     gap: var(--spacing-lg);
-    justify-content: flex-start;
-    gap: 500px;
+    justify-content: space-between;
     margin-top: 15%;
     margin: 5%;
 }
@@ -970,5 +969,4 @@ footer img{
     animation-name: scrollUp;
     animation-direction: reverse; /* Inverte a direção do keyframe */
     /* NOVO: Inicia a 20s (metade de 40s) para manter a Coluna 1 e 2 sempre visíveis, dessincronizando o movimento */
-    animation-delay: -20s; 
-}
+    animation-delay: 

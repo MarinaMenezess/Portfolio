@@ -94,7 +94,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // AVISO DE SEGURANÇA: NUNCA USE UM TOKEN REAL NESTE ARQUIVO EM PROJETOS PÚBLICOS.
     // ISTO EXPÕE SUA CREDENCIAL. USE UM PROXY SERVER-SIDE (FUNÇÃO SERVERLESS) PARA SEGURANÇA.
     // Substitua 'SEU_TOKEN_DE_TESTE_AQUI' pelo seu Personal Access Token para testes.
-    const GITHUB_TOKEN = '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'; 
+    const GITHUB_TOKEN = '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'; 
     const authHeaders = GITHUB_TOKEN && GITHUB_TOKEN !== 'SEU_TOKEN_DE_TESTE_AQUI' ? 
                         { 'Authorization': `token ${GITHUB_TOKEN}` } : 
                         {};
